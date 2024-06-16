@@ -25,14 +25,34 @@ CATEGORY_CHOICES=(
     ('PTC','Pet Care'),
 )
 
+class Heading(models.Model):
+    id = models.IntegerField(primary_key=True)
+    heading_name = models.CharField(max_length=255)
+
+class Category(models.Model):
+    id = models.IntegerField(primary_key=True)
+    category_code = models.CharField(max_length=255)
+    category_name = models.CharField(max_length=255)
+    heading = models.ForeignKey(Heading, on_delete=models.PROTECT)
+    img = models.ImageField(upload_to='category')
+
+class Subcategory(models.Model):
+    id = models.IntegerField(primary_key=True)
+    sub_category_code = models.CharField(max_length=255)
+    sub_category_name = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+
 class Product(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     desc = models.TextField()
     que = models.TextField()
     price = models.FloatField()
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=5)
-    subcategory = models.CharField( max_length=100)
+    category = models.ForeignKey(Category, models.PROTECT)
+    subcategory = models.ForeignKey(Subcategory, models.PROTECT)
     img = models.ImageField(upload_to='prodcut')
 
     def __str__(self):
        return self.name
+
+

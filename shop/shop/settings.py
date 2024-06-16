@@ -78,7 +78,10 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME':'sql12713439',
+        'user': 'sql12713439',
+        'password':'B4iwBgwAU9',
+        'port number': '3306',
     }
 }
 
