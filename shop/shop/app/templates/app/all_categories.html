@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+{% load product_tags %}
+{% load get_dict %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/css/all_cat.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>All Categories</title>
+</head>
+
+<body>
+    <div class="section">
+        
+            <!-- Sidebar for all categories -->
+            <div>
+                <a href="{% url 'home' %}"><i class="fa-solid fa-arrow-left"></i></a>
+                <ul class="list-group">
+                    {% for cat in categories %}
+                    <li class="list-group-item {% if selected_category and cat.id == selected_category.id %}active{% endif %}">
+                        <a href="{% url 'all_categories' %}?category_id={{ cat.id }}">
+                            <p>{{ cat.category_name }}</p>
+                            <img src="/media/{{ cat.img }}">
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Main content for subcategories and products -->
+            <div class="container_2">
+                {% if selected_category %}
+                <h1>{{ selected_category.category_name }}</h1>
+
+                <!-- Subcategories -->
+                <ul class="list-group ">  
+                    {% for subcategory in subcategories %}
+                    <li class="list-group-item d-flex align-items-center">
+                        <a href="{% url 'subcategory' subcategory.id %}" class="d-flex align-items-center">
+                            <div class="img_box">
+                                <img src="/media/{{ subcategory.img }}">
+                            </div>
+                            <p>
+                                {{ subcategory.sub_category_name }}
+                            </p>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        
+    </div>
+
+    <script src="{% static 'app/js/myscript.js' %}"></script>
+</body>
+
+</html>

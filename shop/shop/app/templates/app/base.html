@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+{% load static %}
+{% load product_tags %}
+{% load get_dict %}
+{% load custom_filters %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/css/media.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>BI MART</title>
+</head>
+
+<body>
+
+    <!-- header for big screen -->
+    <header class="header_1">
+        <div class="logo_div">
+            <p>LOGO</p>
+        </div>
+        <a href="#" class="location">
+            <h3>Delivery in 10 minutes</h3>
+            <span>Location <i class="fa-solid fa-caret-down"></i></span>
+        </a>
+        
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Search">
+        </div>
+        {% if request.session.mobile_number %}
+        <div class="account_btn">
+            <p>ACCOUNT</p>
+            <i class="fa-solid fa-caret-down"></i>
+        </div>
+        <div class="account_box">
+            <a href="{% url 'my_addressbook' %}" class="logo_ut-btn">My Address Book</a>
+            <br>
+            <a href="{% url 'logout' %}" class="logo_ut-btn">Log Out</a>
+        </div>
+        {% else %}
+        <a href="#" class="login-btn">LOGIN</a>
+        {% endif %}
+        <div class="login-form">
+            <i class="fa-solid fa-arrow-left"></i>
+            <h1>LOGO</h1>
+            <h2>India's last minute app</h2>
+            <p>Log in or Sign up</p>
+            <form action="/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Mobile No.</label>
+                    <input required type="text" name="phone" id="" class="form-control"
+                        placeholder="enter mobile number">
+                </div>
+                <input type="submit" value="continue">
+            </form>
+        </div>
+        <!-- Cart Section -->
+        <a href="/cart" class="cart-button">
+            <button type="button" class="cart-sec-btn btn btn-primary" data-toggle="modal" data-target="#cart">
+                <i class="fa-solid fa-cart-shopping"></i> <span class="total-count">
+                    ₹{{ total_price }}</span>
+            </button>
+        </a>
+
+
+
+    </header>
+    <!-- header for big screen -->
+
+
+    <!-- header for mobile screen -->
+    <header class="header_2">
+        <div class="upper_div">
+            <a href="#" class="location">
+                <div>
+                    <h3><span>Delivery in </span>10 minutes</h3>
+                    <span>Location <i class="fa-solid fa-caret-down"></i></span>
+                </div>
+            </a>
+            <a href="{% url 'profile' %}" class="user">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        </div>
+        <div class="outer_search_box">
+            <div class="search_box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>search</span>
+            </div>
+        </div>
+    </header>
+    <!-- header for mobile screen -->
+
+    
+<div class="cat_section_2">
+    {% for category in categories %}
+    <a href="{% url 'subcategory' category.pk %}" class="text-decoration-none">
+        {% if category.img %}
+            <div class="cat_box  lh-lg">
+                <div class=" image_box rounded-3 d-flex align-items-end justify-content-center">
+                    <img src="{{ category.img.url }}" style="width: 90px;">
+                </div>
+                <p style="font-weight: 600; font-size: 13px;">
+                    {{ category.category_name }}
+                </p>
+            </div>
+        {% endif %}
+    </a>
+{% endfor %}
+</div>
+    <div class="cat_section">
+        {% for heading, category in heading_category_map.items %}
+        <h1>{{ heading }}</h1>
+        <div class="d-flex gap-3 align-items-center flex-wrap cat-container">
+            {% for category_inst in category %}
+            <a href="{% url 'subcategory' category_inst.id %}" class="text-decoration-none">
+                <div class="cat_box text-center lh-lg">
+                    <div class=" image_box rounded-3 d-flex align-items-center justify-content-center">
+                        <img src="/media/{{ category_inst.img }}" style="width: 90px;">
+                    </div>
+                    <p style="font-weight: 600; font-size: 13px;">
+                        {{ category_inst.category_name }}
+                    </p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="slider-section">
+        <div class="btn-r"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="btn-l"><i class="fa-solid fa-chevron-right"></i></div>
+        {% for val in special_heading_product_list %}
+        <h3>{{ val|get_val:"name" }}</h1>
+            <p>{{ val|get_val:"description" }}</p>
+            <div class="slider-sec">
+                <ul class="product_slide d-flex">
+                    {% for product in val|get_val:"product_list" %}
+                    <a href="{% url 'product_detail' product.id %}" class="cart p-3 text-decoration-none">
+                        <div class="offer">
+                            <p> {{ product.offer_percent }}%  offer</p>
+                        </div>
+                        <div class="image-sec text-center py-4 rounded-3"
+                            style="height:161px; width:165px">
+                            <img class="" style="height:115px" src="/media/{{ product.image1 }}">
+                        </div>
+                        <div class="name_detail">
+                            <span class="mins">8 mins</span>
+                            <h1>{{ product.name|truncatechars:40 }}</h1>
+                            <p> {{ product.que }}</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between cart-section"
+                            data-product-id="{{ product.id }}">
+                            <div class="price">
+                                <p>Rs {{ product.price }}</p>
+                                <p class="disc_price">Rs {{ product.discounted_price }}</p>
+                            </div>
+                            {% if product|get_item_quantity:request.session.cart %}
+                            <div class="card-footer ">
+                                
+                                <form method="post" action="{% url 'add-to-cart' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                    <input type="hidden" name="remove" value="1">
+                                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    <input class="plus_minus" type="submit" value="-">
+                                </form>
+                                <div class="prod_que">{{ product | cart_quantity:request.session.cart }}</div>
+                                <form method="post" action="{% url 'add-to-cart' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    <input class="plus_minus" type="submit" value="+">
+                                </form>
+                            </div>
+                            {% else %}
+                            <form method="post" action="{% url 'add-to-cart' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                <button type="submit" class="add-to-cart-btn">ADD</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+    </div>
+    {% endfor %}
+    </div>
+
+    {% for category in categories %}
+    <a href="{% url 'subcategory' category.pk %}" class="text-decoration-none">{{ category.category_name }}</a>
+    {% endfor %}
+    <a class="all_cat_btn" href="{% url 'all_categories' %}"></a>
+
+
+
+
+
+    <script src="{% static 'app/js/myscript.js' %}"></script>
+
+    <script>
+        // JavaScript code here
+        let leftbtn = document.querySelector(".btn-r");
+        let rightbtn = document.querySelector(".btn-l");
