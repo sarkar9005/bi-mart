@@ -503,6 +503,9 @@ class Success(View):
         order_id = request.GET.get('razorpay_order_id')
         signature = request.GET.get('razorpay_sigature')
 
+        if payment_id:
+            Order.objects.filter(razorpay_payment_id=payment_id).update(paid_status=True)
+
         print('--------', payment_id)
         print('--------', order_id)
 
