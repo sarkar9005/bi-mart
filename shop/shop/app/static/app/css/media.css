@@ -1,0 +1,31 @@
+@media (max-width:1050px){
+    .header_1{
+        display: none;
+    }
+}
+@media (max-width:1050px){
+    .cat_section_2{
+        display: none;
+    }
+}
+@media (max-width:1050px){
+    .cart-button {
+        scale: 1;
+    }
+}
+@media (max-width:1050px){
+    .header_2{
+        display: block;
+    }
+}
+@media (max-width:1050px){
+    .all_cat_btn{
+        display: block;
+    }
+}
+
+@media (max-width:600px){
+    .header_2 .outer_search_box{
+        padding: 0px 0px;
+    }
+}

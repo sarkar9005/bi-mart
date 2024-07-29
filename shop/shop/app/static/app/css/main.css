@@ -1,0 +1,742 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+.header_1{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 0px;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    z-index: 99999999999999999999;
+}
+.header_1 .logo_div{
+    border-right: 1px solid #eee;
+    height: 70px;
+    width: 174px;
+}
+.header_1 .logo_div p{
+    margin-top: 33px;
+    margin-left: 63px;
+}
+.header_1 .logo:hover{
+    background-color: #fbfafa;
+}
+.header_1 .location {
+    line-height: 1.5;
+    display: block;
+    padding: 7px 35px;
+    transition: all 0.3s;
+}
+
+.header_1 .location:hover{
+    background-color: #fbfafa;
+}
+.header_1 .location h3{
+    color: black;
+    font-weight:800;
+    font-size: 18px;
+    text-decoration: none;
+}
+.header_1 .location span{
+    color: black;
+    letter-spacing: 0.6px;
+    font-size: 14px;
+}
+.header_1 .search-box{
+    height: 45px;
+    width: 525px;
+    text-decoration: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(235, 241, 248);
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.header_1 .search-box p{
+    margin-top: 16px;
+}
+.header_1 .search-box input[type="search"] {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+    padding-left: 20px;
+    background-color: transparent;
+}
+.search-box-input:focus {
+    border: none; /* Remove border when typing */
+    outline: none; /* Remove default outline */
+}
+.header_1 .search-box i{
+    font-size: 17px;
+    padding: 14px 14px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.header_1 .login-btn{
+    padding: 32px 55px;
+    font-size: 19px;
+    color: black;
+    transition: all 0.3s;
+}
+.login-btn:hover{
+    background-color: #fbfafa;
+}
+.login-form{
+    position: absolute;
+    top: 180%;
+    left: 33%;
+    background-color: #faf7f7;
+    border-radius: 18px;
+    height: 300px;
+    width: 550px;
+    text-align: center;
+    display: none;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.login-form .fa-arrow-left{
+    position: absolute;
+    left: 5%;
+    font-size: 18px;
+    cursor: pointer;
+}
+.login-form span{
+    font-size: 14px;
+    font-weight: 600;
+}
+.login-form p{
+    margin-top: -18px;
+}
+.login-form .mob-no{
+    border: 1px solid black;
+    padding: 15px 22px;
+    border-radius: 10px;
+}
+.login-form .mob-no input{
+    border: none;
+    padding-left: 10px;
+}
+
+.login-form .mob-no input::placeholder{
+    font-size: 15px;
+    font-weight: 600;
+}
+.login-form a{
+    background: #ff9595;
+    padding: 15px 98px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.cart-buttn{
+    text-decoration: none;
+    display: block;
+}
+.cart-buttn .total-count{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+.cart-sec-btn {
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    height: 54px;
+    width: 117px;
+    border-radius: 10px;
+    color: white;
+    background-color: rgb(8, 131, 8);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    text-decoration: none;
+}
+.cart-sec-btn span{
+    height: 44px;
+    text-decoration: none;
+}
+.cart-sec-btn span p{
+    margin-bottom: 0;
+}
+.cart-sec-btn span p span{
+    margin-left: 7px;
+}
+.my-cart .top{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.my-cart .top li{
+    font-size: 18px;
+    font-weight: 600;
+}
+.my-cart .top i{
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.account_btn{
+    padding: 7px 27px;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    cursor: pointer;
+}
+.account_btn:hover {
+    background-color: #fbfafa;
+    transition: all 0.5s;
+}
+.account_btn p{
+    margin-top: 16px;
+}
+.account_box {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    left: 76%;
+    border: 1px solid;
+    width: 237px;
+    padding: 10px 16px;
+}
+.account_box a{
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+}
+/* header_1 css ends here */
+
+/* header_2 css starts here */
+.header_2{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 10px;
+    display: none;
+}
+.header_2 .upper_div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.header_2 .upper_div a{
+    text-decoration: none;
+    color: black;
+}
+.header_2 .upper_div a div span{
+    font-size: 13px;
+    font-weight: 600;
+}
+.header_2 .upper_div a div h3{
+    font-size: 20px;
+    font-weight: 800;
+}
+.header_2 .upper_div .user{
+    height: 30px;
+    width: 30px;
+    border: 1px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.header_2 .upper_div .user i{
+    font-size: 23px;
+    margin-top: 5px;
+}
+.header_2 .search_box{
+    height: 39px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: rgb(235, 241, 248);
+    color: black;
+}
+.header_2 .search_box .outer_search_box{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.header_2 .search_box .outer_search_box i{
+    margin-left: 15px;
+}
+.header_2 .search_box .outer_search_box p{
+    margin-top: 15px;
+}
+/* header_2 css ends here */
+
+
+/* category css starts here */
+.cat_section{
+    padding: 3px 10px;
+}
+.cat_section h1{
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+.cat_section .cat_box{
+    gap: 0px;
+}
+.cat_section .cat_box .image_box{
+    width: 85px;
+    height: 85px;
+    background-color: #edf5ff;
+}.cat_section .cat_box p{
+    color: #555755;
+    margin-top: 13px;
+    text-wrap: wrap;
+}
+/* category css ends here */
+
+
+/* category mobile css starts here */
+.cat_section_2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 130px;
+}
+.cat_section_2 .cat_box .image_box{
+    width: 105px;
+    height: 100px;
+    background-color: #edf5ff;
+}
+.cat_section_2  a{
+    color: black;
+}
+/* category mobile css ends here */
+/* products section css starts */
+
+
+.slider-section{
+    width: 100%;
+    padding: 9px;
+    padding: 0;
+    transition: all 0.5s;
+}
+.slider-section .slider-sec{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: white;
+    position: relative;
+    font-family: sans-serif;
+    transition: all 0.5s;
+}
+.slider-section .slider-sec:hover .btn-r{
+    display: block;
+    transition: all 0.5s;
+}
+.slider-section .slider-sec:hover .btn-l{
+    display: block;
+    transition: all 0.5s;
+}
+.slider-section .slider-sec h2 a{
+    font-size: 13px;
+    text-decoration: none;
+    color: gray;
+    margin-left: 20px;
+}
+.slider-section .slider-sec .product-slide{
+    display: flex;
+    margin-top: 5px;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-bottom: 50px;
+    transition: all 0.5s;
+    gap: 30px;
+}
+
+.slider-section .cart{
+    width: 200px;
+    height: 335px;
+    box-shadow: 0.0px 0.5px 5px -3px  black;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.slider-section .cart .offer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 19px;
+    width: 75px;
+    background-color: #555755;
+    padding-top: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.slider-section .cart .offer p{
+    color: white;
+    font-size: 12px;
+}
+.slider-section .cart .mins{
+    font-size: 12px;
+    background-color: #edf5ff;
+    padding: 2px 12px;
+    border-radius: 8px;
+    color: black;
+}
+.slider-section .cart .name_detail h1{
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+}
+.slider-section .cart .name_detail p{
+    font-size: 14px;
+    color: #b07c7f;
+}
+.slider-section .cart .price .actual_price{
+    margin-bottom: 0;
+    font-size: 14px;
+    text-decoration: line-through;
+    color: black;
+}
+.slider-section .cart .price .disc_price{
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+}
+.slider-section .cart .add-to-cart-btn{
+    border: none;
+    background: transparent;
+    border: 1px solid green;
+    height: 33px;
+    width: 61px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: green;
+
+}
+.cart-btns{
+    display: flex;
+    flex-flow: row;
+    height: 30px;
+    width: 60px;
+    background: green;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    padding: 0 0px;
+}
+.cart-btns form{
+    padding: 0 8px;
+}
+.cart-btns .plus_minus{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+}
+.cart-btns .prod_que{
+    color: white;
+    font-size: 14px;
+}
+
+/* products section css ends */
+
+
+.all_cat_btn{
+    position: fixed;
+    top: 84%;
+    right: 2%;
+    height: 50px;
+    width: 50px;
+    display: none;
+    border-radius: 50%;
+    background-color: red;
+}
+/* Add this to your CSS file or inside a <style> tag */
+.popup {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+}
+
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+/* Style for the cart popup */
+.cart-popup {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%; 
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    z-index: 1001;
+    overflow-y: auto; /* Add vertical scrollbar if needed */
+}
+.cart-popup .heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cart-popup .prod_details{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.cart-popup .prod_details .name_div{
+    width: 250px;
+    height: 49px;
+}
+.cart-popup .prod_details .name_div .prod_name{
+    margin-bottom: 0;
+}
+.cart-popup .prod_img{
+    padding: 10px 9px;
+    width: 62px;
+    height: auto;
+    box-shadow: 0px 0px 2px 0px;
+    border-radius: 3px;
+}
+.cart-popup p{
+    font-size: 13px;
+}
+.cart-popup .prod_price{
+   margin-bottom: 0;
+   text-decoration: line-through;
+   font-size: 13px;
+}
+.cart-popup .prod_discounted_price{
+   margin-bottom: 0;
+   font-size: 13px;
+   font-weight: 700;
+}
+.cart-popup-content {
+    padding: 20px;
+}
+
+#close-cart-btn {
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: none;
+    z-index: 1000; /* Just below the popup */
+}
+
+.overlay.show {
+    display: block;
+}
+.cart-summary p{
+    font-size: 13px;
+}
+.cart-summary a{
+    color: white;
+    background: #f92323;
+    padding: 11px 133px;
+    text-decoration: none;
+    font-size: medium;
+    border-radius: 9px;
+}
+.cart-button {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 53px;
+    background: white;
+    padding: 10px;
+    text-align: center;
+    z-index: 1000;
+    text-decoration: none;
+    scale: 0;
+}
+.cart-button .total-count{
+    font-size: 14px;
+}
+.cart-button a{
+    text-decoration: none;
+    background: #f34646;
+    color: white;
+    padding: 5px 68px;
+    border-radius: 8px;
+}
+/* silder section for small screen style */
+.slider-section-2{
+    width: 100%;
+    padding: 9px;
+    padding: 0;
+    transition: all 0.5s;
+}
+.slider-section-2 .slider-sec{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: white;
+    position: relative;
+    font-family: sans-serif;
+    transition: all 0.5s;
+}
+.slider-section-2 .slider-sec h2 a{
+    font-size: 13px;
+    text-decoration: none;
+    color: gray;
+    margin-left: 20px;
+}
+.slider-section-2 .slider-sec .product-slide{
+    display: flex;
+    margin-top: 5px;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-bottom: 50px;
+    transition: all 0.5s;
+    padding-left: 10px;
+    gap: 20px;
+}
+
+.slider-section-2 .cart{
+    width: 140px;
+    height: 220px;
+    box-shadow: 0.0px 0.5px 5px -3px  black;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.slider-section-2 .cart .offer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    width: 65px;
+    background-color: #555755;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.slider-section-2 .cart .offer p{
+    color: white;
+    font-size: 10px;
+}
+.slider-section-2 .cart .mins{
+    font-size: 11px;
+    background-color: #edf5ff;
+    padding: 2px 12px;
+    border-radius: 8px;
+    color: black;
+}
+.slider-section-2 .cart .name_detail h1{
+    font-size: 11px;
+    font-weight: 600;
+    color: black;
+}
+.slider-section-2 .cart .name_detail p{
+    font-size: 10px;
+    color: #b07c7f;
+}
+.slider-section-2 .cart .price .actual_price{
+    margin-bottom: 0;
+    font-size: 11px;
+    text-decoration: line-through;
+    color: black;
+}
+.slider-section-2 .cart .price .disc_price{
+    margin-bottom: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: black;
+}
+.slider-section-2 .image-sec{
+    height: 161px;
+    width: 139px;
+    text-align: center;
+}
+.slider-section-2 .cart .add-to-cart-btn{
+    border: none;
+    background: transparent;
+    border: 1px solid green;
+    height: 33px;
+    width: 61px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: green;
+}
+.slider-section-2 .cart-btns{
+    display: flex;
+    flex-flow: row;
+    height: 20px;
+    width: 52px;
+    background: green;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    padding: 0;
+}
+.slider-section-2 .cart-btns form{
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+.slider-section-2 .cart-btns .plus_minus{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 1px 5px;
+}
+.slider-section-2 .cart-btns .prod_que{
+    color: white;
+    font-size: 11px;
+}
+
+
+/* silder section for small screen style */

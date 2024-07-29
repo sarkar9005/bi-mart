@@ -1,0 +1,236 @@
+header{
+    border: 1px solid;
+    max-width: 1920px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+header form{
+    height: 48px;
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 0px 0px 3px -1px;
+    margin: 0 auto;
+    width: 70%;
+}
+header form input{
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+header form input[type="search"] {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+    padding-left: 20px;
+    background-color: transparent;
+}
+header form input::placeholder{
+    padding-left: 20px;
+    font-size: 15px;
+}
+header form button{
+    padding: 7px 16px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+}
+.search-container{
+    width: 100%;
+    margin: 0 auto;
+}
+.search-history{
+    width: 72%;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+.search-history .search-history-inner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.search-history h3 {
+    font-size: 15px;
+    font-weight: 700;
+}
+.search-history h3 i{
+    font-size: 15px;
+    margin-right: 10px;
+}
+.search-history .search-history-inner button{
+    border: none;
+    padding: 6px 8px;
+    background: transparent;
+    font-size: 13px;
+}
+.search-history  a{
+    text-decoration: none;
+    color: black;
+    padding: 12px 11px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 3px -1px;
+}
+.search-results{
+    width: 100%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    border: 1px solid;
+    padding: 0 0px;
+}
+.search-results .product-slide{
+    width: 100%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    border: 1px solid;
+    padding: 0;
+    gap: 28px;
+}
+.cart{
+    height: 335px;
+    box-shadow: 0.0px 0.5px 5px -3px  black;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.cart .offer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 19px;
+    width: 75px;
+    background-color: #555755;
+    padding-top: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.cart .offer p{
+    color: white;
+    font-size: 12px;
+}
+.cart .mins{
+    font-size: 12px;
+    background-color: #edf5ff;
+    padding: 2px 12px;
+    border-radius: 8px;
+    color: black;
+}
+.cart .name_detail h1{
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+}
+.cart .name_detail p{
+    font-size: 14px;
+    color: #b07c7f;
+}
+.cart .price .actual_price{
+    margin-bottom: 0;
+    font-size: 14px;
+    text-decoration: line-through;
+    color: black;
+}
+.cart .price .disc_price{
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+}
+ .cart .add-to-cart-btn{
+    border: none;
+    background: transparent;
+    border: 1px solid green;
+    height: 33px;
+    width: 61px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: green;
+
+}
+.cart-btns{
+    display: flex;
+    flex-flow: row;
+    height: 30px;
+    width: 60px;
+    background: green;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    padding: 0 0px;
+}
+.cart-btns form{
+    padding: 0 8px;
+}
+.cart-btns .plus_minus{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+}
+.cart-btns .prod_que{
+    color: white;
+    font-size: 14px;
+}
+.mobile_section{
+    border: 1px solid;
+    max-width: 1050px;
+    height: 250px;
+    margin: 0 auto;
+}
+.mobile_section .header{
+    border: 1px solid;
+    width: 100%;
+    height: 150px;
+    margin: 0 auto;
+}
+.mobile_section .header form{
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    box-shadow: 0px 0px 3px -1px;
+}
+.mobile_section .header form input{
+    width: 94%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    padding-left: 20px;
+}
+.mobile_section .header form input[type="search"] {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+    padding-left: 20px;
+    background-color: transparent;
+    padding-left: 20px;
+}
+.mobile_section .header form button{
+    width: 65px;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+
+}
+@media (max-width:1050px){
+    header form{
+       width: 98%; 
+    }
+}
+@media (max-width:1050px){
+    .search-history{
+       width: 98%; 
+    }
+}
