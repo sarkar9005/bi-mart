@@ -1,0 +1,114 @@
+
+.section{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+.cart{
+    width: 140px;
+    height: 220px;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 8px;
+}
+.cart .offer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    width: 65px;
+    background-color: #555755;
+    position: absolute;
+    top: 0;
+    left: 14%;
+}
+.cart .offer p{
+    color: white;
+    font-size: 10px;
+    margin-bottom: 0;
+}
+ .cart .mins{
+    font-size: 11px;
+    background-color: #edf5ff;
+    padding: 2px 12px;
+    border-radius: 8px;
+    color: black;
+}
+.cart .name_detail h1{
+    font-size: 11px;
+    font-weight: 600;
+    color: black;
+}
+.cart .name_detail p{
+    font-size: 10px;
+    color: #b07c7f;
+    margin-bottom: 0;
+}
+.cart .price .actual_price{
+    margin-bottom: 0;
+    font-size: 11px;
+    text-decoration: line-through;
+    color: black;
+}
+.cart .price .disc_price{
+    margin-bottom: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: black;
+}
+.image-sec{
+    height: 109px;
+    width: 100px;
+    box-shadow: 0.0px 0.5px 5px -3px black;
+}
+.image-sec img{
+    width: 60px;
+}
+.cart .add-to-cart-btn{
+    border: none;
+    background: transparent;
+    border: 1px solid green;
+    height: 21px;
+    width: 49px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: green;
+}
+ .cart-btns{
+    display: flex;
+    flex-flow: row;
+    height: 21px;
+    width: 49px;
+    background: green;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    padding: 0;
+}
+.cart-btns form{
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+.cart-btns .plus_minus{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 1px 5px;
+}
+.cart-btns .prod_que{
+    color: white;
+    font-size: 11px;
+}
+
+
+/* silder section for small screen style */

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+{% load static %}
+{% load product_tags %}
+{% load get_dict %}
+{% load custom_filters %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/css/media.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/css/product_detail.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{{ product.name }}</title>
+    <style>
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        .thumbnail-image {
+            max-width: 80px;
+            height: auto;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        var currentImageIndex = 0;
+
+        function changeImage(index) {
+            var images = document.getElementsByClassName('product-image');
+            var thumbnails = document.getElementsByClassName('thumbnail-image');
+
+            for (var i = 0; i < images.length; i++) {
+                images[i].style.display = 'none';
+                thumbnails[i].classList.remove('active');
+            }
+
+            images[index].style.display = 'block';
+            thumbnails[index].classList.add('active');
+
+            currentImageIndex = index;
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % 5;
+            changeImage(currentImageIndex);
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + 5) % 5;
+            changeImage(currentImageIndex);
+        }
+
+        function toggleProductDetails() {
+            var detailDiv = document.querySelector('.mobile_detail_of_product');
+            if (detailDiv.style.display === 'none' || detailDiv.style.display === '') {
+                detailDiv.style.display = 'block';
+            } else {
+                detailDiv.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<a href="/" style="color: black; text-decoration: none; margin-left: 10px;"><i class="fa-solid fa-arrow-left"></i>
+    Back</a>
+<header class="header_1">
+    <div class="logo_div">
+        <p>LOGO</p>
+    </div>
+    <div class="outer_search">
+        <a class="text-decoration-none outer_search" href="{% url 'search' %}">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>search</p>
+            </div>
+        </a>
+    </div>
+    {% if request.session.mobile_number %}
+    <div class="account_btn">
+        <p>ACCOUNT</p>
+        <i class="fa-solid fa-caret-down"></i>
+    </div>
+    <div class="account_box">
+        <a href="{% url 'my_addressbook' %}" class="logo_ut-btn">My Address Book</a>
+        <br>
+        <a href="{% url 'logout' %}" class="logo_ut-btn">Log Out</a>
+    </div>
+    {% else %}
+    <a href="#" class="continue_loig">LOGIN</a>
+    {% endif %}
+    <div class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <i class="fa-solid fa-arrow-left close-popup"></i>
+            <h1>LOGO</h1>
+            <h2>India's last minute app</h2>
+            <p>Log in or Sign up</p>
+            <form action="/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Mobile No.</label>
+                    <input required type="text" name="phone" id="" class="form-control"
+                        placeholder="enter mobile number">
+                </div>
+                <input type="submit" value="continue">
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Cart BUTTON -->
+
+
+
+    <a class="cart-buttn " id="open-cart-btn">
+        <button type="button" class="cart-sec-btn" data-toggle="modal" data-target="#cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="total-count">
+                <p>{{ total_count }}<span>items</span></p>
+                <p>₹{{ cart_items|total }}</p>
+            </span>
+        </button>
+    </a>
+
+    <!-- Cart Popup -->
+    <div id="cart-popup" class="cart-popup">
+        <div class="cart-popup-content">
+            <div class="heading">
+                <h4>My Cart</h4>
+                <span id="close-cart-btn">&times;</span>
+            </div>
+            {% for item in cart_items %}
+            <div class="prod_details">
+                <img class="prod_img" src="{{ item.product.image1.url }}" alt="{{ item.product.name }}">
+                <div class="name_div">
+                    <p class="prod_name">{{ item.product.name }}</p>
+                    <p class="prod_quantity">{{ item.quantity }}</p>
+                </div>
+                <div>
+                    <div class="cart-btns">
+                        <form method="post" action="{% url 'add-to-cart' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                            <input type="hidden" name="remove" value="1">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <input class="plus_minus" type="submit" value="-">
+                        </form>
+                        <div class="prod_que">{{ item.product.quantity }}</div>
+                        <form method="post" action="{% url 'add-to-cart' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <input class="plus_minus" type="submit" value="+">
+                        </form>
+                    </div>
+                    <div class="d-flex">
+                        {% if item.product.offer_percent %}
+                        <p class="prod_price">₹{{ item.product.price|multiply_no_decimal:item.quantity }}</p>
+                        <p class="prod_discounted_price">₹{{ item|total_discounted_price }}</p>
+                        {% else %}
+                        <p>₹{{ item.product.price }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="cart-summary mt-5">
+                <h5 class="fw-bold">Bill Details</h5>
+                <div class="item_detail d-flex justify-content-between">
+                    <p><i class="fa-solid fa-truck mr-2" style="margin-right:10px;"></i>items total</p>
+                    <p>₹{{ cart_items|total }}</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Delivery charge</p>
+                    {% if cart_items|final_total < 200 %} <p>₹16</p>
+                        {% else %}
+                        <p><span class="text-decoration-line-through" style="margin-right:5px;">₹16</span>FREE</p>
+                        {% endif %}
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Handling Charge 4</p>
+                    <p>₹4</p>
+                </div>
+                <div class="d-flex justify-content-between">
+
+                    <p class="fs-6 fw-bold">Grand total</p>
+                    <p class="fs-6 fw-bold">₹{{ cart_items|final_total }}</p>
+                </div>
+
+                <a href="/checkout_form">Check Out</a>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+</header>
+<section>
+    <div class="right_container">
+        <div class="outer_image">
+            <div class="container_image">
+                <img id="image0" class="product-image" style="object-fit:contain;" src="{{ product.image1.url }}"
+                    onclick="changeImage(0)" alt="Product Image 1">
+                <img id="image1" class="product-image" style="object-fit:contain;" src="{{ product.image2.url }}"
+                    onclick="changeImage(1)" alt="Product Image 2">
+                <img id="image2" class="product-image" style="object-fit:contain;" src="{{ product.image3.url }}"
+                    onclick="changeImage(2)" alt="Product Image 3">
+                <img id="image3" class="product-image" style="object-fit:contain;" src="{{ product.image4.url }}"
+                    onclick="changeImage(3)" alt="Product Image 4">
+            </div>
+            <div class="thumbnail-container">
+                <img class="thumbnail-image active" src="{{ product.image1.url }}" onclick="changeImage(0)"
+                    alt="Thumbnail Image 1">
+                <img class="thumbnail-image" src="{{ product.image2.url }}" onclick="changeImage(1)"
+                    alt="Thumbnail Image 2">
+                <img class="thumbnail-image" src="{{ product.image3.url }}" onclick="changeImage(2)"
+                    alt="Thumbnail Image 3">
+                <img class="thumbnail-image" src="{{ product.image4.url }}" onclick="changeImage(3)"
+                    alt="Thumbnail Image 4">
+            </div>
+        </div>
+    </div>
+    <div class="left_container">
+        <div class="product_name">
+            <h4>{{ product.name }}</h4>
+            <p class=" time">8 MINS</p>
+            <a href="{% url 'brand_detail' product.brand.id %}" class="link">View all by {{ product.brand.name }}</a>
+            {% if product.offer_percent %}
+            <p class="que"> {{ product.que }}</p>
+            <div class="price">
+                <p class="net_price">{{ product.discounted_price }}</p>
+                <p class="mrp"><span>MRP</span>{{ product.price }}</p>
+            </div>
+            <div class="tax-info-div">
+                <p class="tax-info">(Inclusive of all taxes)
+            </div>
+
+            {% else %}
+            <p>No offer available.</p>
+            {% endif %}
+            <div class="cart-btns">
+                <form method="post" action="{% url 'add-to-cart' %}" class="add-to-cart-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="hidden" name="remove" value="1">
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <input class="plus_minus" type="submit" value="-">
+                </form>
+                <div class="prod_que">{{ product | cart_quantity:request.session.cart }}</div>
+                <form method="post" action="{% url 'add-to-cart' %}" class="add-to-cart-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <input class="plus_minus" type="submit" value="+">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="detail_of_prod">
+    <div class="heading mb-2">
+        <h2>Product Details</h2>
+    </div>
+    <p class="detail">{{ product.detail_1 }}</p>
+    <p>{{ product.detail_2 }}</p>
+    <p class="detail">{{ product.detail_3 }}</p>
+    <p>{{ product.detail_4 }}</p>
+    <p class="detail">{{ product.detail_5 }}</p>
+    <p>{{ product.detail_6 }}</p>
+    <p class="detail">{{ product.detail_7 }}</p>
+    <p>{{ product.detail_8 }}</p>
+    <p class="detail">{{ product.detail_9 }}</p>
+    <p>{{ product.detail_10}}</p>
+    <p class="detail">{{ product.detail_11}}</p>
+    <p>{{ product.detail_12}}</p>
+    <p class="detail">{{ product.detail_13}}</p>
+    <p>{{ product.detail_14}}</p>
+    <p class="detail">{{ product.detail_15}}</p>
+    <p>{{ product.detail_16}}</p>
+    <p class="detail">{{ product.detail_17}}</p>
+    <p>{{ product.detail_18}}</p>
+    <p class="detail">{{ product.detail_19}}</p>
+    <p>{{ product.detail_20}}</p>
+    <p class="detail">{{ product.detail_21}}</p>
+    <p>{{ product.detail_22}}</p>
+    <p class="detail">{{ product.detail_23}}</p>
+    <p>{{ product.detail_24}}</p>
+    <p class="detail">{{ product.detail_25}}</p>
+    <p>{{ product.detail_26}}</p>
+    <p class="detail">{{ product.detail_27}}</p>
+    <p>{{ product.detail_28}}</p>
+    <p class="detail">{{ product.detail_29}}</p>
+    <p>{{ product.detail_30}}</p>
+</div>
+<div class="mobile_detals_box">
+    <h5 class="mt-3 px-2">Product Details</h5>
+    <p class="detail px-2">{{ product.detail_1 }}</p>
+    <p class="px-2 m-0">{{ product.detail_2 }}</p>
+    <p class="show_details" onclick="toggleProductDetails()">View more details<i class="fa-solid fa-sort-down px-2"></i>
+    </p>
+    <div class="mobile_detail_of_product px-3">
+        <p class="detail">{{ product.detail_1 }}</p>
+        <p>{{ product.detail_2 }}</p>
+        <p class="detail">{{ product.detail_3 }}</p>
+        <p>{{ product.detail_4 }}</p>
+        <p class="detail">{{ product.detail_5 }}</p>
+        <p>{{ product.detail_6 }}</p>
+        <p class="detail">{{ product.detail_7 }}</p>
+        <p>{{ product.detail_8 }}</p>
+        <p class="detail">{{ product.detail_9 }}</p>
+        <p>{{ product.detail_10}}</p>
+        <p class="detail">{{ product.detail_11}}</p>
+        <p>{{ product.detail_12}}</p>
+        <p class="detail">{{ product.detail_13}}</p>
+        <p>{{ product.detail_14}}</p>
+        <p class="detail">{{ product.detail_15}}</p>
+        <p>{{ product.detail_16}}</p>
+        <p class="detail">{{ product.detail_17}}</p>
+        <p>{{ product.detail_18}}</p>
+        <p class="detail">{{ product.detail_19}}</p>
+        <p>{{ product.detail_20}}</p>
+        <p class="detail">{{ product.detail_21}}</p>
+        <p>{{ product.detail_22}}</p>
+        <p class="detail">{{ product.detail_23}}</p>
+        <p>{{ product.detail_24}}</p>
+        <p class="detail">{{ product.detail_25}}</p>
+        <p>{{ product.detail_26}}</p>
+        <p class="detail">{{ product.detail_27}}</p>
+        <p>{{ product.detail_28}}</p>
+        <p class="detail">{{ product.detail_29}}</p>
+        <p>{{ product.detail_30}}</p>
+    </div>
+</div>
+
+<div class="slider-section-2">
+    <div class="slider-sec">
+        <ul class="product-slide d-flex">
+            {% for similar_product in similar_products %}
+            <a href="{% url 'product_detail' similar_product.pk %}" class="cart  text-decoration-none">
+                <div class="offer">
+                    <p> {{ similar_product.offer_percent }}% offer</p>
+                </div>
+                <div class="image-sec text-center py-4 rounded-3">
+                    <img class="" src="{{ similar_product.image1.url }}">
+                </div>
+                <div class="name_detail">
+                    <span class="mins">8 mins</span>
+                    <h1>{{ similar_product.name|truncatechars:40 }}</h1>
+                    <p> {{ similar_product.que }}</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between cart-section w-100">
+                    <div class="price">
+                        <p class="actual_price">Rs {{ product.price }}</p>
+                        <p class="disc_price">Rs {{ product.discounted_price }}</p>
+                    </div>
+                    {% if similar_product|get_item_quantity:request.session.cart %}
+                    <div class="cart-btns">
+                        <form method="post" action="{% url 'add-to-cart' %}" class="add-to-cart-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ similar_product.pk }}">
+                            <input type="hidden" name="remove" value="1">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <button class="plus_minus" class="btn-decrement plus_minus">-</button>
+                        </form>
+                        <div class="prod_que">{{ similar_product | cart_quantity:request.session.cart }}</div>
+                        <form method="post" action="{% url 'add-to-cart' %}" class="add-to-cart-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ similar_product.pk }}">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <button class="plus_minus" class="plus_minus">+</button>
+                        </form>
+                    </div>
+                    {% else %}
+                    <form method="post" action="{% url 'add-to-cart' %}" class="add-to-cart-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ similar_product.pk }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        <button type="submit" class="btn-add">Add to Cart</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<ul class="brand_box">
+    {% for brand in brands %}
+    <li>
+        <a href="{% url 'brand_cat' brand.id %}" class="brand-link">
+            <div class="img_box">
+                <img src="{{ brand.image.url }}" alt="{{ brand.name }}" style="width: 40px; height: 40px;">
+            </div>
+            <p>{{ brand.name }}</p>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+
+<h2>Similar Products</h2>
+
+<div class="prod_detail" style="position: fixed; top: 90%; left: 0; justify-content: space-between;
+padding: 2px 5px; width: 100%; background-color: white;">
+    <div>
+        <p class="que" style="margin-bottom: 0;"> {{ product.que }}</p>
+        <div class="price" style="display: flex; gap: 5px; align-items: end;">
+            <p class="net_price" style="font-weight: 600; font-size: 17px;">{{ product.discounted_price }}</p>
+            <div style="display: flex; gap: 5px;">
+                <span>MRP</span>
+                <p style="text-decoration: line-through;">{{ product.price }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between cart-section"
+        data-product-id="product-{{ product.id }}">
+        {% if product|get_item_quantity:request.session.cart %}
+        <div class="cart-btns">
+            <form method="post" action="{% url 'add-to-cart' %}" class="add-to-cart-form">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="hidden" name="remove" value="1">
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                <input class="plus_minus" type="submit" value="-">
+            </form>
+            <div class="prod_que">{{ product | cart_quantity:request.session.cart }}</div>
+            <form method="post" action="{% url 'add-to-cart' %}" class="add-to-cart-form">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                <input class="plus_minus" type="submit" value="+">
+            </form>
+        </div>
+        {% else %}
+        <form method="post" action="{% url 'add-to-cart' %}" class="add-to-cart-form">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+            <button type="submit" class="add-to-cart-btn">Add to cart</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // JavaScript code
+    const decreaseBtn = document.getElementById('decrease');
+    const increaseBtn = document.getElementById('increase');
+    const quantityDisplay = document.getElementById('quantity');
+    const addToCartBtn = document.getElementById('add-to-cart');
+    const add = document.querySelector(".quantity-selector");
+
+    let quantity = 0;
+
+    decreaseBtn.addEventListener('click', () => {
+        if (quantity > 0) {
+            quantity--;
+            quantityDisplay.textContent = quantity;
+            updateButtonVisibility();
+        }
+    });
+
+    increaseBtn.addEventListener('click', () => {
+        quantity++;
+        quantityDisplay.textContent = quantity;
+        updateButtonVisibility();
+    });
+
+    x
+
+
+    addToCartBtn.addEventListener('click', () => {
+        quantity++;
+        quantityDisplay.textContent = quantity;
+        updateButtonVisibility();
+    });
+
+    function updateButtonVisibility() {
+        if (quantity > 0) {
+            addToCartBtn.style.display = 'none';
+        } else {
+            addToCartBtn.style.display = 'inline-block';
+        }
+    }
+
+
+    add.addEventListener('click', () => {
+
+        add.style.display = "inline-block";
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    document.getElementById('image0').style.display = 'block';
+</script>
+</body>
+
+</html>

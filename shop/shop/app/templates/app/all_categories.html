@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+{% load product_tags %}
+{% load get_dict %}
+{% load custom_filters %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'app/css/all_cat.css' %}" />
+    <title>Categories</title>
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            {% for cat in categories %}
+            <li class="{% if selected_category and cat.id == selected_category.id %}active{% endif %}">
+                <a href="{% url 'all_categories' %}?category_id={{ cat.id }}">
+                    <img src="/media/{{ cat.img }}" alt="{{ cat.category_name }}">
+                    <span>{{ cat.category_name }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>{{ selected_category.category_name }}</h1>
+        <div class="grid">
+            {% for subcategory in subcategories %}
+            <div class="grid-item">
+                <a href="{% url 'subcategory' subcategory.id %}">
+                    <img src="/media/{{ subcategory.img }}" alt="{{ subcategory.sub_category_name }}">
+                    <p>{{ subcategory.sub_category_name }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

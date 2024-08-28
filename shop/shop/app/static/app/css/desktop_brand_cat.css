@@ -1,0 +1,91 @@
+.desktop_brand_cat .cart{
+    width: 200px;
+    height: 335px;
+    box-shadow: 0.0px 0.5px 5px -3px  black;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.desktop_brand_cat .cart .offer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 19px;
+    width: 75px;
+    background-color: #555755;
+    padding-top: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.desktop_brand_cat .cart .offer p{
+    color: white;
+    font-size: 12px;
+}
+.desktop_brand_cat .cart .mins{
+    font-size: 12px;
+    background-color: #edf5ff;
+    padding: 2px 12px;
+    border-radius: 8px;
+    color: black;
+}
+.desktop_brand_cat .cart .name_detail h1{
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+}
+.desktop_brand_cat .cart .name_detail p{
+    font-size: 14px;
+    color: #b07c7f;
+}
+.desktop_brand_cat .cart .price .actual_price{
+    margin-bottom: 0;
+    font-size: 14px;
+    text-decoration: line-through;
+    color: black;
+}
+.desktop_brand_cat .cart .price .disc_price{
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+}
+.desktop_brand_cat .add-to-cart-btn{
+    border: none;
+    background: transparent;
+    border: 1px solid green;
+    height: 33px;
+    width: 61px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: green;
+
+}
+.desktop_brand_cat .cart-btns{
+    display: flex;
+    flex-flow: row;
+    height: 30px;
+    width: 60px;
+    background: green;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    padding: 0 0px;
+}
+.desktop_brand_cat .cart-btns form{
+    padding: 0 8px;
+}
+.desktop_brand_cat .cart-btns .plus_minus{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+}
+.desktop_brand_cat .cart-btns .prod_que{
+    color: white;
+    font-size: 14px;
+}
